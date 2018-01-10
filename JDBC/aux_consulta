@@ -1,0 +1,9 @@
+SELECT Purchase_place_name, Product_name FROM Product INNER JOIN Product_has_Purchase_place ON Product.Product_id = Product_has_Purchase_place.Product_id INNER JOIN Purchase_place ON Purchase_place.Purchase_place_id = Product_has_Purchase_place.Purchase_place_id ORDER BY (Product_name)
+
+SELECT Store_name, Product_name FROM Product INNER JOIN Store_has_Product ON Store_has_Product.Product_id = Product.Product_id INNER JOIN Store ON Store.Store_id = Store_has_Product.Store_id ORDER BY (Store_name)
+
+SELECT COUNT(Product_name) AS Number_of_Products, Brand_name FROM Product INNER JOIN Brand_has_Product ON Product.Product_id = Brand_has_Product.Product_id INNER JOIN Brand ON Brand.Brand_id = Brand_has_Product.Brand_id GROUP BY Brand_name ORDER BY Number_of_Products desc
+
+SELECT COUNT(P.Product_id) AS Number_of_Allergens, Brand_name FROM Product INNER JOIN Brand_has_Product ON Product.Product_id = Brand_has_Product.Product_id INNER JOIN Product_has_Allergen ON Product.Product_id = Product_has_Allergen.Product_id INNER JOIN Allergen ON Allergen.Allergen_id = Product_has_Allergen.Allergen_id INNER JOIN Brand ON Brnad.Brand_id = Brand_has_Product.Brand_id GROUP BY Brand_name ORDER BY Number_of_Allergens desc
+
+SELECT AVG(P.CarbohydrateFor100gPer100ml) AS AVG_Carbohydrate, Brand_name FROM Product INNER JOIN Brand_has_Product  ON Prodcut.Product_id = Brand_has_Product.Product_id INNER JOIN Brand ON Brand.Brand_id = Brand_has_Product.Brand_id GROUP BY Brand_name HAVING AVG_Carbohydrate > 0 ORDER BY AVG_Carbohydrate desc
